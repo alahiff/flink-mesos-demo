@@ -21,7 +21,18 @@ $ docker build -t alahiff/flink-on-mesos:0.4.5 .
 ### Start the AppMaster
 Instead of producing an image with baked-in Mesos configuration we pass them as arguments to the container:
 ```
-$ docker run -itd --net=host -v /path/to/flink/conf:/opt/flink/conf alahiff/flink-on-mesos:0.4.5 /opt/flink/bin/mesos-appmaster.sh -Dmesos.failover-timeout=60 -Dmesos.master= -Dmesos.resourcemanager.framework.role= -Dmesos.resourcemanager.framework.principal= -Dmesos.resourcemanager.framework.secret= -Dmesos.resourcemanager.tasks.container.type=docker -Dmesos.resourcemanager.tasks.container.image.name=alahiff/flink-on-mesos:0.4.5 -Dmesos.resourcemanager.tasks.cpus=1 -Dmesos.initial-tasks=1 -Djobmanager.rpc.address=
+docker run -itd --net=host -v /path/to/flink/conf:/opt/flink/conf alahiff/flink-on-mesos:0.4.5 \
+    /opt/flink/bin/mesos-appmaster.sh \
+    -Dmesos.failover-timeout=60
+    -Dmesos.master= \
+    -Dmesos.resourcemanager.framework.role= \
+    -Dmesos.resourcemanager.framework.principal= \
+    -Dmesos.resourcemanager.framework.secret= \
+    -Dmesos.resourcemanager.tasks.container.type=docker \
+    -Dmesos.resourcemanager.tasks.container.image.name=alahiff/flink-on-mesos:0.4.5 \
+    -Dmesos.resourcemanager.tasks.cpus=1 \
+    -Dmesos.initial-tasks=1 \
+    -Djobmanager.rpc.address=
 ```
 
 In addition to the standard settings, the following 
