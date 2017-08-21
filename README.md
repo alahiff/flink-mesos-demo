@@ -46,7 +46,7 @@ Mesos-specific settings may be configured:
 | `mesos.resourcemanager.framework.principal` | The Mesos framework principal. |
 | `mesos.resourcemanager.framework.secret` | The Mesos framework secret. |
 
-I found that I needed to change `jobmanager.rpc.address` to the hostname of the machine on which I run the AppMaster.
+I found that I needed to change `jobmanager.rpc.address` to the hostname of the machine on which I run the AppMaster, otherwise the TaskManagers would try to connect to localhost rather than the correct hostname on which the AppMaster is running.
 
 ### Open the Web UI
 Browse to `http://<appmaster host>:8081/`
