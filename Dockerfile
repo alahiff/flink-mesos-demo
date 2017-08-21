@@ -21,6 +21,4 @@ ENV _SLOTS 2
 ENV _CLIENT_USERNAME root
 ENV _CLIENT_SESSION_ID default
 
-CMD $JAVA_HOME/bin/java -cp "*" -Dlog.file=jobmaster.log -Dlog4j.configuration=file:log4j.properties org.apache.flink.mesos.runtime.clusterframework.MesosApplicationMasterRunner --configDir /opt/flink/conf
-
 WORKDIR /opt
