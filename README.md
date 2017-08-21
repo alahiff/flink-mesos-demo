@@ -23,7 +23,7 @@ Instead of producing an image with baked-in Mesos configuration we pass them as 
 ```
 docker run -itd --net=host -v /path/to/flink/conf:/opt/flink/conf alahiff/flink-on-mesos:0.4.5 \
     /opt/flink/bin/mesos-appmaster.sh \
-    -Dmesos.failover-timeout=60
+    -Dmesos.failover-timeout=60 \
     -Dmesos.master= \
     -Dmesos.resourcemanager.framework.role= \
     -Dmesos.resourcemanager.framework.principal= \
