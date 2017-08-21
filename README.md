@@ -28,17 +28,17 @@ Mesos-specific settings may be configured:
 ### Build the docker image
 ```
 $ cd <repo>
-$ docker build -t eronwright/flink-mesos-demo:latest .
+$ docker build -t alahiff/flink-on-mesos:0.4.4 .
 ```
  
 ### Start the AppMaster
+Instead of producing an image with baked-in Mesos configuration we bind mount the `conf` directory into the container:
 ```
-$ docker run -itd --net=host eronwright/flink-mesos-demo:latest
+$ docker run -itd --net=host -v /path/to/flink/conf:/opt/flink/conf alahiff/flink-on-mesos:0.4.4
 ```
 
 ### Open the Web UI
 Browse to `http://<appmaster host>:8081/`
-
 
 ## Notes
 
