@@ -24,6 +24,7 @@ Mesos-specific settings may be configured:
 | `mesos.resourcemanager.framework.principal` | The Mesos framework principal. |
 | `mesos.resourcemanager.framework.secret` | The Mesos framework secret. |
 
+I found that I needed to change `jobmanager.rpc.address` from `localhost` to the hostname of the machine on which I run the AppMaster.
 
 ### Build the docker image
 ```
