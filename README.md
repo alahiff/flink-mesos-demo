@@ -12,8 +12,19 @@ Feel free to launch a Docker container manually, or as a Marathon/Aurora applica
 
 ## Quick-Start
 
-### Configure Flink
-Edit the Flink configuration in the `conf` directory. In addition to the standard settings, the following 
+### Build the docker image
+```
+$ cd <repo>
+$ docker build -t alahiff/flink-on-mesos:0.4.5 .
+```
+ 
+### Start the AppMaster
+Instead of producing an image with baked-in Mesos configuration we pass them as arguments to the container:
+```
+$ docker run -itd --net=host -v /path/to/flink/conf:/opt/flink/conf alahiff/flink-on-mesos:0.4.5 /opt/flink/bin/mesos-appmaster.sh -Dmesos.failover-timeout=60 -Dmesos.master= -Dmesos.resourcemanager.framework.role= -Dmesos.resourcemanager.framework.principal= -Dmesos.resourcemanager.framework.secret= -Dmesos.resourcemanager.tasks.container.type=docker -Dmesos.resourcemanager.tasks.container.image.name=alahiff/flink-on-mesos:0.4.5 -Dmesos.resourcemanager.tasks.cpus=1 -Dmesos.initial-tasks=1 -Djobmanager.rpc.address=
+```
+
+In addition to the standard settings, the following 
 Mesos-specific settings may be configured:
 
 | Key            | Description |
@@ -24,19 +35,7 @@ Mesos-specific settings may be configured:
 | `mesos.resourcemanager.framework.principal` | The Mesos framework principal. |
 | `mesos.resourcemanager.framework.secret` | The Mesos framework secret. |
 
-I found that I needed to change `jobmanager.rpc.address` from `localhost` to the hostname of the machine on which I run the AppMaster.
-
-### Build the docker image
-```
-$ cd <repo>
-$ docker build -t alahiff/flink-on-mesos:0.4.4 .
-```
- 
-### Start the AppMaster
-Instead of producing an image with baked-in Mesos configuration we bind mount the `conf` directory into the container:
-```
-$ docker run -itd --net=host -v /path/to/flink/conf:/opt/flink/conf alahiff/flink-on-mesos:0.4.4
-```
+I found that I needed to change `jobmanager.rpc.address` to the hostname of the machine on which I run the AppMaster.
 
 ### Open the Web UI
 Browse to `http://<appmaster host>:8081/`
