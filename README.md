@@ -19,7 +19,7 @@ $ docker build -t alahiff/flink-on-mesos:0.4.5 .
 ```
  
 ### Start the AppMaster
-Instead of producing an image with baked-in Mesos configuration we pass them as arguments to the container:
+Instead of producing an image with baked-in Mesos configuration we pass them as arguments to the mesos-appmaster.sh script run in the container:
 ```
 docker run -itd --net=host -v /path/to/flink/conf:/opt/flink/conf alahiff/flink-on-mesos:0.4.5 \
     /opt/flink/bin/mesos-appmaster.sh \
